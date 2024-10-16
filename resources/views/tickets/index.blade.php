@@ -41,8 +41,8 @@
                                             <span class="fa fa-edit"></span>
                                         </button>
                                     </a>
-                                    <a href="" class="btn btn-normal">
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{$ticket->id}}">
+                                    <a class="btn btn-normal" title="Eliminar">
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $ticket->id }}">
                                             <span class="fa fa-trash"></span>
                                         </button>
                                     </a>

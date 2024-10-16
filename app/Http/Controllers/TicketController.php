@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Requests\TicketRequest;
@@ -47,7 +47,8 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        $ticket = Ticket::find($ticket->id);
+        return view('tickets.show', compact('ticket'));
     }
 
     /**
@@ -55,7 +56,8 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
-        //
+        $ticket = Ticket::find($ticket->id);
+        return view('tickets.edit', compact('ticket'));
     }
 
     /**
@@ -63,7 +65,13 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        //
+        $ticket = Ticket::find($ticket->id);
+        $ticket->nombre = $request->nombre;
+        $ticket->tipo_tramite = $request->tipo_tramite;
+        $ticket->estado = $request->estado == '1' ? 1 : 0;
+        $ticket->save();
+        return redirect()->route('tickets.index')
+                        ->with('mensaje', '¡El ticket fue actualizado!');
     }
 
     /**
@@ -71,6 +79,25 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        Ticket::find($ticket->id)->delete();
+        return back()->with('mensaje', '¡El ticket fue eliminado!');
+    }
+
+    public function reporte()
+    {
+        $noatendidos = Ticket::select(DB::raw('count(*) as mes_count_0, month(fecha) as mes_0'))
+                            ->where('estado', 0)
+                            ->whereYear('fecha', '2024')
+                            ->groupBy(DB::raw('month(fecha)'))
+                            ->get();
+        $siatendidos = Ticket::select(DB::raw('count(*) as mes_count_1, month(fecha) as mes_1'))
+                            ->where('estado', 1)
+                            ->whereYear('fecha', '2024')
+                            ->groupBy(DB::raw('month(fecha)'))
+                            ->get();
+        // echo $noatendidos;
+        // echo $siatendidos;
+        // echo DB::table('tickets')->count();
+        return view('tickets.reporte', compact('noatendidos', 'siatendidos'));
     }
 }

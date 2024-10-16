@@ -19,7 +19,7 @@ class TicketFactory extends Factory
         return [
             'nombre'=> $this->faker->name(),
             'tipo_tramite'=> $this->faker->randomElement(['PLATAFORMA', 'VENTANILLA']),
-            'fecha'=> $this->faker->dateTime(),
+            'fecha'=> $this->faker->dateTimeBetween('-1 years', 'now'),
             'estado' => $this->faker->randomElement([0,1]),
         ];
     }

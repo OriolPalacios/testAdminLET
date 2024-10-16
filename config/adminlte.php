@@ -373,19 +373,19 @@ return [
         ],
         ['header' => 'labels'],
         [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
+            'text' => 'Reporte',
+            'icon_color' => 'purple',
+            'url' => '/reporte',
         ],
+        // [
+        //     'text' => 'Dashboard',
+        //     'icon_color' => 'yellow',
+        //     'url' => '/dashboard',
+        // ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
+            'text' => 'Tickets',
             'icon_color' => 'cyan',
-            'url' => '#',
+            'url' => '/tickets',
         ],
     ],
 
@@ -460,7 +460,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

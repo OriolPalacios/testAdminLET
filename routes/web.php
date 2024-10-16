@@ -13,3 +13,9 @@ Route::get('/dashboard', function () {
 });
 
 Route::resource('tickets', TicketController::class);
+
+// Route::get('/graficos', function () {
+//     return view('graficos');
+// });
+
+Route::get('/reporte', TicketController::class . '@reporte');

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-delete-{{ $ticket->id }}" style="display: none">
+<div class="modal fade" id="modal-delete-{{ $ticket->id }}" style="display: none;">
     <form action="{{ route('tickets.destroy', $ticket->id) }}" method="post">
         @csrf
         @method('DELETE')
